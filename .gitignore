@@ -16,3 +16,6 @@ _refresh_report.md
 
 # empty leftover after migration
 skills/
+
+# backup files
+*.bak
