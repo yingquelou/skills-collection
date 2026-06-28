@@ -1,0 +1,18 @@
+.worktrees/
+.private-journal/
+.claude/
+.DS_Store
+node_modules/
+inspo
+triage/
+
+# audit & migration reports (generated, not for tracking)
+_audit.md
+_cross_reference_check.md
+_full_inventory.md
+_migration_log.md
+_pre_migration_report.md
+_refresh_report.md
+
+# empty leftover after migration
+skills/
