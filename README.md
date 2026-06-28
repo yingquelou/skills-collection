@@ -214,7 +214,7 @@ The general contribution process for Superpowers is below. Keep in mind that we 
 4. Follow the `writing-skills` skill for creating and testing new and modified skills
 5. Submit a PR, being sure to fill in the pull request template.
 
-See `skills/writing-skills/SKILL.md` for the complete guide.
+See `writing-skills/SKILL.md` for the complete guide.
 
 ## Updating
 
