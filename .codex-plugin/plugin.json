@@ -20,7 +20,7 @@
     "code-review",
     "workflow"
   ],
-  "skills": "./skills/",
+  "skills": "../",
   "interface": {
     "displayName": "Superpowers",
     "shortDescription": "Planning, TDD, debugging, and delivery workflows for coding agents",

@@ -1,12 +1,12 @@
-: << 'CMDBLOCK'
 @echo off
 REM Cross-platform polyglot wrapper for hook scripts.
-REM On Windows: cmd.exe runs the batch portion, which finds and calls bash.
-REM On Unix: the shell interprets this as a script (: is a no-op in bash).
 REM
-REM Hook scripts use extensionless filenames (e.g. "session-start" not
-REM "session-start.sh") so Claude Code's Windows auto-detection -- which
-REM prepends "bash" to any command containing .sh -- doesn't interfere.
+REM DESIGN:
+REM   Windows (cmd.exe): executes lines 1-47 (batch section) then exits.
+REM   Unix (bash):       sees @echo off fail, then the entire Windows
+REM                      batch section (lines 2-47) is consumed by a
+REM                      bash heredoc (silently skipped), and finally
+REM                      the Unix section (lines 49+) runs.
 REM
 REM Usage: run-hook.cmd <script-name> [args...]
 
@@ -34,12 +34,17 @@ if %ERRORLEVEL% equ 0 (
     exit /b %ERRORLEVEL%
 )
 
-REM No bash found - exit silently rather than error
+REM No bash found -- exit silently rather than error.
 REM (plugin still works, just without SessionStart context injection)
 exit /b 0
-CMDBLOCK
+: <<'__UNIX__'
 
-# Unix: run the named script directly
+REM Everything above is consumed as heredoc body by bash on Unix.
+REM On Windows this line and below are never reached (exited above).
+
+__UNIX__
+
+# === Unix section (reached by bash after heredoc ends) ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCRIPT_NAME="$1"
 shift
